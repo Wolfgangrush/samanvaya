@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "samanvaya"
 version = "0.3.0"
-description = "Offline multi-jurisdiction privacy conformance. Six regimes, one declaration, no ranking."
+description = "Offline multi-jurisdiction privacy conformance. Four regimes, one declaration, no ranking."
 requires-python = ">=3.11"
 license = {text = "MIT"}
 readme = "README.md"

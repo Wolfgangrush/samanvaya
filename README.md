@@ -5,8 +5,8 @@
 **Offline multi-jurisdiction privacy conformance. Four regimes, one declaration, no ranking.**
 
 <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"/></a>
-<img src="https://img.shields.io/badge/tests-546-brightgreen" alt="546 tests"/>
-<img src="https://img.shields.io/badge/coverage-91.1%25-brightgreen" alt="91.1% coverage"/>
+<img src="https://img.shields.io/badge/tests-790-brightgreen" alt="790 tests"/>
+<img src="https://img.shields.io/badge/coverage-90.8%25-brightgreen" alt="90.8% coverage"/>
 <img src="https://img.shields.io/badge/network-none-informational" alt="no network"/>
 <img src="https://img.shields.io/badge/rails-1%20sourced%20·%203%20draft-orange" alt="1 sourced, 3 draft"/>
 
@@ -337,10 +337,16 @@ and white. See [`BMAD/09-BMAD-SPEC-house-style.md`](BMAD/09-BMAD-SPEC-house-styl
 ## Tests
 
 ```bash
-python3 -m pytest -q
+uv run --extra dev python -m pytest -q
 ```
 
-775 tests, 88% line coverage. [`tests/test_falsifiers.py`](tests/test_falsifiers.py) executes
+`--extra dev` is load-bearing: `pytest` lives in the `dev` extra, and the runtime
+dependencies alone (`fpdf`, among others) are what `test_cli`, `test_pdf_report` and
+`test_questionnaire` import. A bare system `python3 -m pytest` fails to collect those
+three with `ModuleNotFoundError: No module named 'fpdf'`. That is a missing
+environment, not a broken suite.
+
+790 tests, 90.8% line coverage. [`tests/test_falsifiers.py`](tests/test_falsifiers.py) executes
 the five conditions that would prove the design wrong, stated in
 [`BMAD/04-BMAD-SPEC.md`](BMAD/04-BMAD-SPEC.md) before the code existed. One of them
 — an obligation being resolved before the determination it depends on — **fired for real** during
