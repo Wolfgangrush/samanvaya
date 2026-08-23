@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0",
+  "declaration_author": "Marcus Delahunt, external adviser",
+  "declaration_date": "2027-10-03",
+  "organisation": {
+    "legal_name": "Nordwald Handels GmbH",
+    "legal_form": "limited liability company (GmbH)",
+    "employee_count": 900,
+    "annual_revenue_usd": 480000000,
+    "consumer_count": 4200000,
+    "is_public_authority": false,
+    "is_healthcare_provider": false,
+    "is_financial_institution": false,
+    "is_educational_institution": false,
+    "offers_services_to_children": false,
+    "conducts_large_scale_monitoring": false,
+    "processes_special_category_data": false,
+    "share_of_revenue_from_selling_personal_data": 0.0
+  },
+  "jurisdictions": [
+    {
+      "country": "DE",
+      "sub_units": [],
+      "sub_units_complete": true
+    },
+    {
+      "country": "GB",
+      "sub_units": [],
+      "sub_units_complete": true
+    }
+  ],
+  "data_categories": [
+    "name",
+    "home address",
+    "email address",
+    "telephone number",
+    "order history",
+    "payment card details (tokenised)",
+    "delivery preferences",
+    "marketing preferences"
+  ],
+  "purposes": [
+    "fulfilment of customer orders",
+    "returns and refunds handling",
+    "direct marketing by email where opted in",
+    "fraud prevention",
+    "loyalty programme administration"
+  ],
+  "recipients": [
+    "fulfilment centres in Germany and Poland",
+    "parcel carriers",
+    "payment service provider",
+    "email marketing platform"
+  ],
+  "security_safeguards": [
+    { "control": "encryption at rest", "value": "AES-256 across all customer data stores" },
+    { "control": "encryption in transit", "value": "TLS 1.3 enforced on storefront and APIs" },
+    { "control": "network segmentation", "value": "PCI environment isolated from general estate" },
+    { "control": "penetration testing", "value": "annual external test with remediation tracking" },
+    { "control": "staff training", "value": "mandatory annual data protection training for all staff" }
+  ],
+  "retention": [
+    { "purpose": "fulfilment of customer orders", "period": "6 years from order date", "basis": "commercial and tax record-keeping" },
+    { "purpose": "direct marketing by email where opted in", "period": "24 months after last engagement" },
+    { "purpose": "fraud prevention", "period": "5 years", "basis": "legitimate interests balancing documented" }
+  ],
+  "notice": {
+    "described": true,
+    "describes_personal_data": true,
+    "describes_purpose": true,
+    "describes_rights_exercise_method": true,
+    "describes_complaint_method_to_regulator": true,
+    "available_in_local_language": true,
+    "given_before_or_with_consent_request": true,
+    "identifies_recipients": true,
+    "states_retention_period": true,
+    "states_controller_identity": true,
+    "states_transfer_destinations": true
+  },
+  "consent_mechanism": {
+    "described": true,
+    "mechanism": "unbundled checkboxes at account creation; marketing consent managed through a consent management platform",
+    "is_opt_in": true,
+    "withdrawal_as_easy_as_giving": true,
+    "granular_by_purpose": true,
+    "is_pre_checked": false,
+    "is_bundled_with_unrelated_terms": false,
+    "request_in_clear_plain_language": true,
+    "local_language_option_offered": true,
+    "privacy_officer_contact_provided": true,
+    "obtained_via_consent_manager": true
+  },
+  "breach_workflow": {
+    "described": true,
+    "notifies_regulator": true,
+    "regulator_deadline_hours": 72,
+    "notifies_affected_individuals": true,
+    "individual_notification_trigger": "where the breach is likely to result in a high risk to the rights and freedoms of natural persons",
+    "maintains_breach_register": true,
+    "register_retention_period": "retained for the lifetime of the organisation"
+  },
+  "dsr_workflow": {
+    "described": true,
+    "rights_supported": [
+      "access",
+      "rectification",
+      "erasure",
+      "restriction of processing",
+      "data portability",
+      "objection"
+    ],
+    "response_deadline_days": 30,
+    "grievance_mechanism_published": true,
+    "grievance_response_period_days": 30,
+    "identity_verification": true
+  },
+  "governance": {
+    "has_privacy_officer": true,
+    "privacy_officer_contact_published": true,
+    "conducts_impact_assessments": true,
+    "impact_assessment_frequency_months": 24,
+    "conducts_audits": true,
+    "audit_frequency_months": 12,
+    "maintains_processing_records": true,
+    "processor_contracts_in_place": true,
+    "processor_contract_covers_security": true
+  },
+  "cross_border": {
+    "transfers_outside_jurisdiction": true,
+    "destination_countries": ["PL", "US"],
+    "transfer_mechanism": "EU standard contractual clauses with transfer impact assessments on file",
+    "impact_assessment_per_transfer": true
+  },
+  "children": {
+    "described": true,
+    "processes_data_of_children": false,
+    "tracks_children": false,
+    "targeted_advertising_to_children": false
+  }
+}

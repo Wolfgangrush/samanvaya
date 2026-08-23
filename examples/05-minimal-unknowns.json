@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "declaration_author": "Adrian Vasquez-Mbeki, external adviser",
+  "jurisdictions": [
+    {
+      "country": "IN",
+      "sub_units": [],
+      "sub_units_complete": true
+    }
+  ],
+  "organisation": {
+    "legal_name": "Kookaburra Ridge Wellness Collective Pty Ltd"
+  }
+}

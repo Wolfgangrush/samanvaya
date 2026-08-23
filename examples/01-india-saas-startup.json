@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "declaration_author": "Priya Raghunathan, external adviser",
+  "declaration_date": "2027-11-12",
+  "organisation": {
+    "legal_name": "Ledgerloom Analytics Private Limited",
+    "legal_form": "private limited company",
+    "employee_count": 40,
+    "annual_revenue_usd": 3200000,
+    "consumer_count": 1200,
+    "is_public_authority": false,
+    "is_healthcare_provider": false,
+    "is_financial_institution": false,
+    "is_educational_institution": false,
+    "offers_services_to_children": false,
+    "conducts_large_scale_monitoring": false,
+    "processes_special_category_data": false,
+    "notified_significant_data_fiduciary": false,
+    "share_of_revenue_from_selling_personal_data": 0.0
+  },
+  "jurisdictions": [
+    {
+      "country": "IN",
+      "sub_units": [],
+      "sub_units_complete": true
+    }
+  ],
+  "data_categories": [
+    "name",
+    "business email address",
+    "employer and job title",
+    "billing address",
+    "product usage telemetry",
+    "support ticket correspondence"
+  ],
+  "purposes": [
+    "provisioning and maintaining the SaaS subscription",
+    "billing and accounts receivable",
+    "product analytics and service improvement",
+    "customer support"
+  ],
+  "recipients": [
+    "cloud hosting provider (EU-West region)",
+    "payment gateway",
+    "email delivery service"
+  ],
+  "security_safeguards": [
+    { "control": "encryption at rest", "value": "AES-256 on production databases" },
+    { "control": "encryption in transit", "value": "TLS 1.2 or higher on all endpoints" },
+    { "control": "access control", "value": "role-based access with quarterly review" },
+    { "control": "logging", "value": "centralised audit logs retained 180 days" }
+  ],
+  "retention": [
+    { "purpose": "provisioning and maintaining the SaaS subscription", "period": "90 days after subscription end", "basis": "contractual necessity" },
+    { "purpose": "billing and accounts receivable", "period": "8 years", "basis": "Indian tax record-keeping requirement" },
+    { "purpose": "product analytics and service improvement", "period": "13 months", "basis": "aggregated beyond 13 months" }
+  ],
+  "notice": {
+    "described": true,
+    "describes_personal_data": true,
+    "describes_purpose": true,
+    "describes_rights_exercise_method": true,
+    "describes_complaint_method_to_regulator": true,
+    "available_in_local_language": true,
+    "given_before_or_with_consent_request": true,
+    "identifies_recipients": true,
+    "states_retention_period": true,
+    "states_controller_identity": true,
+    "states_transfer_destinations": true
+  },
+  "consent_mechanism": {
+    "described": true,
+    "mechanism": "checkbox presented at signup, separate from terms of service",
+    "is_opt_in": true,
+    "withdrawal_as_easy_as_giving": true,
+    "granular_by_purpose": true,
+    "request_in_clear_plain_language": true,
+    "local_language_option_offered": true
+  },
+  "breach_workflow": {
+    "described": true,
+    "notifies_regulator": true,
+    "regulator_deadline_hours": 72,
+    "notifies_affected_individuals": true,
+    "individual_notification_trigger": "without undue delay where the breach is likely to cause harm to the data principal",
+    "maintains_breach_register": true,
+    "register_retention_period": "3 years from last recorded entry"
+  },
+  "dsr_workflow": {
+    "described": true,
+    "rights_supported": [
+      "access",
+      "correction",
+      "erasure",
+      "grievance redressal"
+    ],
+    "response_deadline_days": 30,
+    "grievance_mechanism_published": true,
+    "grievance_response_period_days": 30,
+    "identity_verification": true
+  },
+  "cross_border": {
+    "transfers_outside_jurisdiction": true,
+    "destination_countries": ["NL"],
+    "transfer_mechanism": "permitted contract terms within the standard contractual clauses appended to the hosting agreement"
+  },
+  "children": {
+    "described": true,
+    "processes_data_of_children": false,
+    "verifiable_parental_consent": null,
+    "tracks_children": false,
+    "targeted_advertising_to_children": false
+  }
+}

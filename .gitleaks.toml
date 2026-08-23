@@ -1,0 +1,79 @@
+# gitleaks configuration.
+#
+# This repository contains a credential-refusal firewall (`src/samanvaya/credentials.py`)
+# and the tests that prove it works. Both necessarily contain strings SHAPED like secrets,
+# because a detector that has never been shown a secret-shaped string is untested.
+#
+# Every entry below is allowlisted deliberately, with a reason. The rule is not "silence
+# the scanner" — it is "state, in a file a reviewer can read, exactly which secret-shaped
+# strings are here and why each one is inert". An unexplained allowlist is worse than a
+# noisy scanner.
+#
+# Nothing here is a live credential. If a real one is ever added, it must NOT be added to
+# this file; it must be removed from the repository and rotated.
+
+title = "samanvaya"
+
+[extend]
+useDefault = true
+
+[[rules]]
+  id = "aws-access-key-id"
+  description = "AWS access key id"
+  regex = '''\b(?:AKIA|ASIA)[0-9A-Z]{16}\b'''
+  [rules.allowlist]
+    description = """
+      AKIAIOSFODNN7EXAMPLE is Amazon's own published, non-functional example access key id.
+      It appears verbatim throughout AWS's documentation and authenticates nothing. It is
+      used here as a positive test case for the credential firewall: the detector must
+      catch this shape, so the shape has to be present in the tests.
+    """
+    regexes = ['''AKIAIOSFODNN7EXAMPLE''']
+    paths = [
+      '''tests/test_schema\.py''',
+      '''tests/test_audit_regressions\.py''',
+      '''src/samanvaya/credentials\.py''',
+      '''\.gitleaks\.toml''',
+    ]
+
+[[rules]]
+  id = "private-key-header"
+  description = "PEM private key header"
+  regex = '''-----BEGIN (?:RSA |EC |DSA |OPENSSH |PGP |ENCRYPTED )?PRIVATE KEY-----'''
+  [rules.allowlist]
+    description = """
+      A bare PEM header with no key body follows it. There is no key material in this
+      repository. The header is present because the firewall must recognise it, and a
+      detector shipped without a test for its own headline case is a detector nobody
+      should rely on.
+    """
+    paths = [
+      '''tests/test_schema\.py''',
+      '''tests/test_audit_regressions\.py''',
+      '''src/samanvaya/credentials\.py''',
+      '''\.gitleaks\.toml''',
+    ]
+
+[allowlist]
+  description = """
+    Synthetic connection strings used as firewall test fixtures. Each names a host that
+    does not exist and a password that authenticates nothing; they exist so the tests can
+    prove that a declaration carrying a connection string is REFUSED. Refusing to hold a
+    client credential is the first item on this project's banned-scope list, because
+    possession of one would make the author a Data Processor in his own right, with his
+    own statutory breach-notification duty.
+  """
+  regexes = [
+    '''postgresql://u:p@host:5432/db''',
+    '''mysql://root:toor@example-db-host/app''',
+    '''mongodb\+srv://admin:pw@cluster\.mongodb\.net''',
+    '''hunter2''',
+    '''wJalrXUtnFEMIK7MDENGbPxRfiCYEXAMPLEKEY''',
+  ]
+  paths = [
+    '''tests/fixtures/declaration_with_credential\.json''',
+    '''tests/test_schema\.py''',
+    '''tests/test_audit_regressions\.py''',
+    '''src/samanvaya/credentials\.py''',
+    '''\.gitleaks\.toml''',
+  ]

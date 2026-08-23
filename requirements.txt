@@ -1,0 +1,3 @@
+PyYAML>=6.0
+# dpdp-law-to-code pin recorded in pyproject.toml to keep requirements.txt offline-friendly.
+# [FACT NEEDED: exact pinned version of dpdp-law-to-code]

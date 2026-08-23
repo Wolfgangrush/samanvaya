@@ -1,0 +1,134 @@
+{
+  "schema_version": "1.0",
+  "declaration_author": "R. Mahajan, Advocate",
+  "declaration_date": "2026-08-19",
+  "organisation": {
+    "legal_name": "Unstated Footprint LLC",
+    "legal_form": "private company limited by shares",
+    "employee_count": 40,
+    "annual_revenue_usd": 3000000,
+    "consumer_count": 12000,
+    "is_public_authority": false,
+    "is_healthcare_provider": false,
+    "is_financial_institution": false,
+    "is_educational_institution": false,
+    "offers_services_to_children": false,
+    "conducts_large_scale_monitoring": false,
+    "processes_special_category_data": false,
+    "notified_significant_data_fiduciary": false,
+    "share_of_revenue_from_selling_personal_data": 0.0
+  },
+  "jurisdictions": [
+    {
+      "country": "US",
+      "sub_units": [],
+      "sub_units_complete": false
+    }
+  ],
+  "data_categories": [
+    "contact details",
+    "usage telemetry"
+  ],
+  "purposes": [
+    "service delivery",
+    "customer support"
+  ],
+  "recipients": [
+    "cloud hosting provider"
+  ],
+  "security_safeguards": [
+    {
+      "control": "encryption",
+      "value": "AES-256 at rest and TLS 1.3 in transit"
+    },
+    {
+      "control": "access control",
+      "value": "role-based access control"
+    },
+    {
+      "control": "logging",
+      "value": "access logs with monthly review"
+    },
+    {
+      "control": "backups",
+      "value": "nightly encrypted backups"
+    },
+    {
+      "control": "log retention",
+      "value": "one year"
+    },
+    {
+      "control": "processor contract security clause",
+      "value": "present in all processor contracts"
+    },
+    {
+      "control": "technical and organisational measures",
+      "value": "documented ISMS"
+    }
+  ],
+  "consent_mechanism": {
+    "described": true,
+    "mechanism": "explicit opt-in at sign-up with per-purpose toggles",
+    "is_opt_in": true,
+    "withdrawal_as_easy_as_giving": true,
+    "granular_by_purpose": true,
+    "parental_consent_verifiable": false,
+    "records_kept": true
+  },
+  "breach_workflow": {
+    "described": true,
+    "notifies_regulator": true,
+    "regulator_deadline_hours": 72,
+    "notifies_affected_individuals": true,
+    "individual_notification_trigger": "on becoming aware, without delay",
+    "maintains_breach_register": true,
+    "register_retention_period": "two years"
+  },
+  "dsr_workflow": {
+    "described": true,
+    "rights_supported": [
+      "access",
+      "correction",
+      "completion",
+      "updating",
+      "erasure",
+      "grievance",
+      "nomination"
+    ],
+    "response_deadline_days": 30,
+    "grievance_mechanism_published": true,
+    "grievance_response_period_days": 30,
+    "identity_verification": true
+  },
+  "governance": {
+    "has_privacy_officer": true,
+    "privacy_officer_contact_published": true,
+    "conducts_impact_assessments": false,
+    "impact_assessment_frequency_months": null,
+    "conducts_audits": false,
+    "audit_frequency_months": null,
+    "maintains_processing_records": true,
+    "processor_contracts_in_place": true,
+    "processor_contract_covers_security": true
+  },
+  "cross_border": {
+    "transfers_outside_jurisdiction": true,
+    "destination_countries": [
+      "SG"
+    ],
+    "transfer_mechanism": "intra-group agreement",
+    "impact_assessment_per_transfer": false
+  },
+  "retention": [
+    {
+      "purpose": "service delivery",
+      "period": "for the life of the account",
+      "basis": "contract"
+    },
+    {
+      "purpose": "access logs",
+      "period": "one year",
+      "basis": "statutory"
+    }
+  ]
+}

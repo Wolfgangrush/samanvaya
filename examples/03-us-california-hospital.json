@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "declaration_author": "Dana Whitcomb, external adviser",
+  "declaration_date": "2027-09-18",
+  "organisation": {
+    "legal_name": "Buena Vista Regional Medical Center",
+    "legal_form": "non-profit hospital corporation",
+    "employee_count": 3100,
+    "annual_revenue_usd": 60000000,
+    "consumer_count": 250000,
+    "is_public_authority": false,
+    "is_healthcare_provider": true,
+    "is_financial_institution": false,
+    "is_educational_institution": false,
+    "offers_services_to_children": true,
+    "conducts_large_scale_monitoring": false,
+    "processes_special_category_data": true
+  },
+  "jurisdictions": [
+    {
+      "country": "US",
+      "sub_units": ["US-CA"],
+      "sub_units_complete": true
+    }
+  ],
+  "data_categories": [
+    "identifiers collected in patient registration",
+    "protected health information held in the electronic health record",
+    "health insurance information",
+    "emergency contact details",
+    "patient portal account credentials and access logs"
+  ],
+  "purposes": [
+    "treatment and clinical care coordination",
+    "payment and claims processing",
+    "hospital operations and quality review",
+    "patient portal access management"
+  ],
+  "recipients": [
+    "health insurance payers",
+    "state immunisation registry (as required by law)",
+    "electronic health record vendor acting under a business associate agreement"
+  ],
+  "security_safeguards": [
+    { "control": "encryption at rest", "value": "AES-256 for the electronic health record store" },
+    { "control": "access control", "value": "role-based access with break-the-glass auditing" },
+    { "control": "authentication", "value": "multi-factor authentication for all remote and clinical system access" },
+    { "control": "risk analysis", "value": "annual security risk analysis documented" }
+  ],
+  "retention": [
+    { "purpose": "treatment and clinical care coordination", "period": "adult records 10 years after last encounter; paediatric records 10 years past age of majority", "basis": "California hospital record retention requirements" },
+    { "purpose": "payment and claims processing", "period": "7 years", "basis": "payer contract and billing requirements" }
+  ],
+  "notice": {
+    "described": true,
+    "describes_personal_data": true,
+    "describes_purpose": true,
+    "describes_rights_exercise_method": true,
+    "describes_complaint_method_to_regulator": true,
+    "available_in_local_language": true,
+    "identifies_recipients": true,
+    "states_retention_period": true,
+    "states_controller_identity": true
+  },
+  "consent_mechanism": {
+    "described": true,
+    "mechanism": "notice of privacy practices acknowledged at registration; written authorisation obtained for uses outside treatment, payment, and operations",
+    "is_opt_in": true,
+    "granular_by_purpose": true,
+    "records_kept": true,
+    "is_free": true,
+    "is_specific": true,
+    "is_informed": true,
+    "request_in_clear_plain_language": true
+  },
+  "breach_workflow": {
+    "described": true,
+    "notifies_regulator": true,
+    "regulator_deadline_hours": 72,
+    "notifies_affected_individuals": true,
+    "individual_notification_trigger": "unauthorized acquisition of unencrypted medical information, on discovery and without unreasonable delay",
+    "maintains_breach_register": true,
+    "register_retention_period": "6 years"
+  },
+  "dsr_workflow": {
+    "described": true,
+    "rights_supported": [
+      "access to own medical record",
+      "amendment of the medical record",
+      "accounting of disclosures",
+      "restriction requests",
+      "confidential communications"
+    ],
+    "response_deadline_days": 30,
+    "grievance_mechanism_published": true,
+    "identity_verification": true
+  },
+  "governance": {
+    "has_privacy_officer": true,
+    "privacy_officer_contact_published": true,
+    "conducts_audits": true,
+    "audit_frequency_months": 12,
+    "maintains_processing_records": true
+  },
+  "cross_border": {
+    "transfers_outside_jurisdiction": false,
+    "destination_countries": []
+  },
+  "children": {
+    "described": true,
+    "processes_data_of_children": true,
+    "verifiable_parental_consent": true,
+    "tracks_children": false,
+    "targeted_advertising_to_children": false,
+    "age_verification_method": "paediatric registration with parent or guardian signature"
+  }
+}

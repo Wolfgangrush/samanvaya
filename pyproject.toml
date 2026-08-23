@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "samanvaya"
+version = "0.3.0"
+description = "Offline multi-jurisdiction privacy conformance. Six regimes, one declaration, no ranking."
+requires-python = ">=3.11"
+license = {text = "MIT"}
+readme = "README.md"
+authors = [
+    {name = "Rushikesh R. Mahajan (wolfgang_rush)"}
+]
+keywords = ["privacy", "conformance", "dpdp", "gdpr", "pipeda", "hipaa", "multi-jurisdiction", "offline"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Legal Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Office/Business :: Legal",
+]
+dependencies = [
+  "PyYAML>=6.0",
+  # Pure-Python PDF writer for the client-facing report. Chosen over a headless
+  # browser because a single-file binary cannot depend on Chrome being installed,
+  # and over hand-rolling because font metrics in a legal deliverable are not a
+  # good place to own bugs. No images are embedded, so Pillow is never exercised.
+  "fpdf2>=2.8",
+  "dpdp-law-to-code @ git+https://github.com/Wolfgangrush/dpdp-law-to-code@da1547769ffd2f8329ded1df271ad18dc7ff8479"
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "hypothesis>=6.0", "mypy>=1.10"]
+
+[project.scripts]
+samanvaya = "samanvaya.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.mypy]
+strict = true
+
+# dpdp (dpdp-law-to-code) ships no py.typed marker. It is a third-party pin we do not
+# control, so we cannot annotate the import as covered. The contract between us and
+# dpdp is enforced at runtime by `registry.py`'s adapter validation, not by mypy.
+[[tool.mypy.overrides]]
+module = "dpdp.*"
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# uv's editable install writes a __editable__*.pth that the interpreter does not
+# execute here, so `import samanvaya` fails and every test module errors at
+# collection unless PYTHONPATH=src is set by hand. Pointing pytest at the real
+# source tree removes that trap: the suite runs with a bare `pytest`, and it runs
+# against the same files mypy checks and PyInstaller bundles via `--paths src`.
+pythonpath = ["src"]
+markers = [
+  "slow: re-runs the pinned upstream dpdp-law-to-code suite; minutes, not seconds",
+  "upstream: requires the pinned dpdp-law-to-code package",
+]

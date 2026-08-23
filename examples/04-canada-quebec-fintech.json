@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "declaration_author": "Elodie Tremblay-Ferrante, external adviser",
+  "declaration_date": "2027-11-28",
+  "organisation": {
+    "legal_name": "Cartograph Financial Technologies Inc.",
+    "legal_form": "federal corporation",
+    "employee_count": 180,
+    "annual_revenue_usd": 24000000,
+    "consumer_count": 4000,
+    "is_public_authority": false,
+    "is_healthcare_provider": false,
+    "is_financial_institution": true,
+    "is_educational_institution": false,
+    "offers_services_to_children": false,
+    "conducts_large_scale_monitoring": false,
+    "processes_special_category_data": false,
+    "share_of_revenue_from_selling_personal_data": 0.0
+  },
+  "jurisdictions": [
+    {
+      "country": "CA",
+      "sub_units": ["CA-QC"],
+      "sub_units_complete": true
+    }
+  ],
+  "data_categories": [
+    "name",
+    "residential address",
+    "email address",
+    "date of birth",
+    "social insurance number",
+    "account and transaction records",
+    "credit bureau information",
+    "device and session identifiers used for fraud detection"
+  ],
+  "purposes": [
+    "identity verification and know-your-customer checks",
+    "opening and servicing payment accounts",
+    "fraud detection and prevention",
+    "regulatory reporting",
+    "customer service"
+  ],
+  "recipients": [
+    "credit bureaus",
+    "payment network operators",
+    "identity verification service provider",
+    "cloud hosting provider (Canadian region)"
+  ],
+  "security_safeguards": [
+    { "control": "encryption at rest", "value": "AES-256 for all customer data stores" },
+    { "control": "encryption in transit", "value": "TLS 1.3" },
+    { "control": "access control", "value": "least-privilege access with privileged access management" },
+    { "control": "monitoring", "value": "continuous security monitoring with incident escalation runbooks" }
+  ],
+  "retention": [
+    { "purpose": "identity verification and know-your-customer checks", "period": "7 years after account closure", "basis": "federal anti-money-laundering record retention" },
+    { "purpose": "opening and servicing payment accounts", "period": "7 years after account closure" },
+    { "purpose": "fraud detection and prevention", "period": "24 months" }
+  ],
+  "notice": {
+    "described": true,
+    "describes_personal_data": true,
+    "describes_purpose": true,
+    "describes_rights_exercise_method": true,
+    "describes_complaint_method_to_regulator": true,
+    "available_in_local_language": true,
+    "given_before_or_with_consent_request": true,
+    "identifies_recipients": true,
+    "states_retention_period": true,
+    "states_controller_identity": true,
+    "states_transfer_destinations": true
+  },
+  "consent_mechanism": {
+    "described": true,
+    "mechanism": "separate affirmative consents presented in French or English at onboarding, withdrawal via account settings",
+    "is_opt_in": true,
+    "withdrawal_as_easy_as_giving": true,
+    "granular_by_purpose": true,
+    "records_kept": true,
+    "is_specific": true,
+    "is_informed": true,
+    "is_unambiguous": true,
+    "has_clear_affirmative_action": true,
+    "limited_to_specified_purpose": true,
+    "is_pre_checked": false,
+    "is_bundled_with_unrelated_terms": false,
+    "request_in_clear_plain_language": true,
+    "local_language_option_offered": true
+  },
+  "breach_workflow": {
+    "described": true,
+    "notifies_regulator": true,
+    "regulator_deadline_hours": 72,
+    "notifies_affected_individuals": true,
+    "individual_notification_trigger": "risk of serious injury, without unreasonable delay",
+    "maintains_breach_register": true,
+    "register_retention_period": "5 years"
+  },
+  "dsr_workflow": {
+    "described": true,
+    "rights_supported": [
+      "access",
+      "rectification",
+      "withdrawal of consent",
+      "portability of information provided directly"
+    ],
+    "response_deadline_days": 30,
+    "grievance_mechanism_published": true,
+    "grievance_response_period_days": 30,
+    "identity_verification": true
+  },
+  "governance": {
+    "has_privacy_officer": true,
+    "privacy_officer_contact_published": true,
+    "maintains_processing_records": true,
+    "processor_contracts_in_place": true,
+    "processor_contract_covers_security": true
+  },
+  "cross_border": {
+    "transfers_outside_jurisdiction": false,
+    "destination_countries": []
+  },
+  "children": {
+    "described": true,
+    "processes_data_of_children": false,
+    "tracks_children": false,
+    "targeted_advertising_to_children": false
+  }
+}
