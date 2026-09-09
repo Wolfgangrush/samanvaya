@@ -356,6 +356,10 @@ class Organisation:
     processes_special_category_data: bool | None = None
     notified_significant_data_fiduciary: bool | None = None
     share_of_revenue_from_selling_personal_data: float | None = None
+    data_categories: tuple[str, ...] = ()
+    purposes: tuple[str, ...] = ()
+    recipients: tuple[str, ...] = ()
+    retention: str | None = None
 
 
 @dataclass(frozen=True)
@@ -405,6 +409,8 @@ class ConsentMechanism:
     local_language_option_offered: bool | None = None
     privacy_officer_contact_provided: bool | None = None
     obtained_via_consent_manager: bool | None = None
+    consent_text: str | None = None
+    withdrawal_method: str | None = None
 
 
 @dataclass(frozen=True)
@@ -422,6 +428,7 @@ class BreachWorkflow:
     individual_notification_trigger: str | None = None
     maintains_breach_register: bool | None = None
     register_retention_period: str | None = None
+    incident_severity_rule: str | None = None
 
 
 @dataclass(frozen=True)
@@ -434,6 +441,7 @@ class DsrWorkflow:
     grievance_mechanism_published: bool | None = None
     grievance_response_period_days: int | None = None
     identity_verification: bool | None = None
+    request_channel: str | None = None
 
 
 @dataclass(frozen=True)
@@ -484,6 +492,7 @@ class NoticeDeclaration:
     states_retention_period: bool | None = None
     states_controller_identity: bool | None = None
     states_transfer_destinations: bool | None = None
+    is_multi_lingual: str | None = None
 
 
 @dataclass(frozen=True)
@@ -517,6 +526,7 @@ class ChildProcessingDeclaration:
     targeted_advertising_to_children: bool | None = None
     likely_detrimental_effect: bool | None = None
     age_verification_method: str | None = None
+    responsible_person_designated: bool | None = None
 
 
 @dataclass(frozen=True)

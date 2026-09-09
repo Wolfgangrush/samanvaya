@@ -17,20 +17,14 @@ was found, and was patched with a special case whose comment reads: *"the interv
 the question and discards what it is told"*. Nobody then asked what else was in that
 class. Ten more were.
 
-WHAT THIS FILE DOES, AND WHAT IT DELIBERATELY DOES NOT
------------------------------------------------------
-It does NOT fix the ten. That is a product decision with two defensible answers and it
-belongs to the maintainer, not to a test:
-
-  (a) grow the schema so the facts are recorded — honest, larger, and the fields would
-      sit inert until a pack reads them; or
-  (b) stop asking questions the product cannot consume — smaller, and it throws away
-      intake material whose `why` text cites real provisions.
-
-What it does is stop the rot: the known orphans are listed here explicitly, so an
-eleventh one fails this test the moment it is added, and removing one from the list is a
-deliberate act recorded in a commit. Same shape as the UI baseline — the current state is
-pinned, and change has to be argued for rather than happening quietly.
+WHAT THIS FILE DOES NOW
+-----------------------
+The maintainer chose option (a): the schema grew a home for every asked question,
+so the known-orphan list below stands EMPTY. It is kept — deliberately — as an
+empty frozenset: an eleventh orphan fails the test the moment it is added, and
+adding a path to the list is a deliberate act recorded in a commit. Same shape as
+the UI baseline — the current state is pinned, and change has to be argued for
+rather than happening quietly.
 """
 
 from __future__ import annotations
@@ -58,23 +52,10 @@ _TOP_LEVEL_SPECIAL_CASES: frozenset[str] = frozenset(
     {"declaration.security_safeguards"}
 )
 
-#: Questions asked whose answers the declaration cannot hold, as measured on
-#: 2026-08-22. This list is a record of a known defect, not a design. It must only ever
-#: get SHORTER.
-KNOWN_ORPHANS: frozenset[str] = frozenset(
-    {
-        "organisation.data_categories",
-        "organisation.purposes",
-        "organisation.recipients",
-        "organisation.retention",
-        "notice.is_multi_lingual",
-        "consent_mechanism.consent_text",
-        "consent_mechanism.withdrawal_method",
-        "breach_workflow.incident_severity_rule",
-        "dsr_workflow.request_channel",
-        "children.responsible_person_designated",
-    }
-)
+#: Questions asked whose answers the declaration cannot hold. Empty since the schema
+#: grew a field for each of the ten found on 2026-08-22. This list is a record of a
+#: fixed defect, not a design. It must never gain a member quietly.
+KNOWN_ORPHANS: frozenset[str] = frozenset()
 
 
 def _orphans() -> set[str]:
@@ -133,7 +114,7 @@ class TestNoQuestionQuietlyLosesItsAnswer:
 
     def test_the_scale_of_the_defect_is_stated_not_buried(self) -> None:
         """A number in a test is harder to forget than a number in a commit message."""
-        assert len(KNOWN_ORPHANS) == 10, (
+        assert len(KNOWN_ORPHANS) == 0, (
             f"the orphan count changed to {len(KNOWN_ORPHANS)}; say so out loud"
         )
         assert len(QUESTIONS) == 83
