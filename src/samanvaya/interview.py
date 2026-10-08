@@ -1016,6 +1016,21 @@ def declaration_to_answers(declaration: dict[str, object]) -> dict[str, object]:
                 value = block[field.name]
                 if value is not None:
                     flat[f"{block_name}.{field.name}"] = value
+
+    # Mirror of the `declaration.` special case in `answers_to_declaration`: the
+    # safeguards live at the TOP level, not inside a block, so the loop above never
+    # sees them. The interview collected safeguard NAMES and the forward direction
+    # stores each name as both control and value, so flattening the controls back
+    # out returns exactly what the adviser typed.
+    safeguards = declaration.get("security_safeguards")
+    if isinstance(safeguards, list):
+        names = [
+            str(pair["control"]).strip()
+            for pair in safeguards
+            if isinstance(pair, dict) and pair.get("control")
+        ]
+        if names:
+            flat["declaration.security_safeguards"] = names
     return flat
 
 

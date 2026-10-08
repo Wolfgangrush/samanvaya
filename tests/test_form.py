@@ -708,17 +708,18 @@ class TestClearingAFieldUnAnswersIt:
 class TestReopeningLosesNothing:
     """The working file is the FORM's state, not a declaration.
 
-    It was built with `answers_to_declaration`, which is lossy by design: an answer
-    whose path has no field on a block dataclass is dropped. Ten questions are in that
-    position today, so reopening a meeting silently discarded eleven of eighty-three
-    answers — the client had said them, the adviser had typed them, and they were gone.
+    It was built with `answers_to_declaration`, which was lossy by design: an answer
+    whose path has no field on a block dataclass is dropped. Ten questions were in
+    that position until the schema grew a home for each, so reopening a meeting
+    through a saved declaration silently discarded eleven of eighty-three answers —
+    the client had said them, the adviser had typed them, and they were gone.
 
     That was a specification error in the brief this module was built to, not a
     misreading of it. A declaration is what you PRODUCE at the end; it is the wrong
     container for work in progress, because it can only hold what the engine can
-    consume. The working file now carries the form's own answers verbatim, and `resume`
-    still opens a plain declaration written by the CLI interview, because an adviser
-    who started in the terminal must be able to finish in the window.
+    consume. The working file now carries the form's own answers verbatim, and
+    `resume` still opens a plain declaration written by the CLI interview, because
+    an adviser who started in the terminal must be able to finish in the window.
     """
 
     def _answer_everything(self, form) -> int:
@@ -758,18 +759,58 @@ class TestReopeningLosesNothing:
         for question in QUESTIONS:
             assert resumed.get(question.path) == form.get(question.path), question.path
 
-    def test_an_orphan_question_survives_too(self, form, tmp_path: Path) -> None:
-        """The ten questions the declaration cannot hold are still the client's answers.
+    def test_every_answer_survives_a_resume_through_the_saved_declaration(
+        self, form, tmp_path: Path
+    ) -> None:
+        """Fill → save a declaration → close → reopen: all 83 answers come back.
 
-        Whatever the maintainer decides about the schema, the form must not be the thing
-        that loses them.
+        The working file is lossless; the DECLARATION was not — ten question paths
+        had no field to land in, so `declaration_to_answers` could not hand them
+        back. Resuming a saved declaration is the path an adviser takes when the
+        meeting started in the terminal, and it must not lose what the client said.
         """
         from samanvaya.form import IntakeForm
-        from tests.test_question_homes import KNOWN_ORPHANS
 
+        answered = self._answer_everything(form)
+        assert answered == len(QUESTIONS)
+        saved = tmp_path / "declaration.json"
+        form.save(saved)
+
+        resumed = IntakeForm.resume(saved)
+        assert resumed.total_progress().answered == answered, (
+            f"resume through a saved declaration lost "
+            f"{answered - resumed.total_progress().answered} answers"
+        )
+        for question in QUESTIONS:
+            assert resumed.get(question.path) == form.get(question.path), question.path
+
+    def test_an_orphan_question_survives_too(self, form, tmp_path: Path) -> None:
+        """The questions the declaration once could not hold are still the client's answers.
+
+        The declaration now has a field for every one of the ten former orphans, so
+        the pin in ``tests/test_question_homes.py`` stands at zero. This test keeps
+        the historical list honest at the form layer: each of those answers must
+        survive a resume through a SAVED DECLARATION — the path that lost them.
+        """
+        from samanvaya.form import IntakeForm
+
+        former_orphans = (
+            "organisation.data_categories",
+            "organisation.purposes",
+            "organisation.recipients",
+            "organisation.retention",
+            "notice.is_multi_lingual",
+            "consent_mechanism.consent_text",
+            "consent_mechanism.withdrawal_method",
+            "breach_workflow.incident_severity_rule",
+            "dsr_workflow.request_channel",
+            "children.responsible_person_designated",
+        )
         self._answer_everything(form)
-        resumed = IntakeForm.resume(tmp_path / "working.json")
-        for path in sorted(KNOWN_ORPHANS):
+        saved = tmp_path / "declaration.json"
+        form.save(saved)
+        resumed = IntakeForm.resume(saved)
+        for path in former_orphans:
             assert resumed.get(path) == form.get(path), path
 
     def test_the_identity_fields_survive(self, form, tmp_path: Path) -> None:

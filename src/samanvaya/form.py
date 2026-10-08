@@ -549,8 +549,10 @@ class IntakeForm:
         The working file is NOT a declaration. It was one, and that lost answers: a
         declaration can only hold what the engine can consume, so every answer whose
         path has no field on a block dataclass was dropped on the way out and gone on
-        the way back. Ten questions are in that position today, and reopening a meeting
-        silently discarded eleven of eighty-three answers the client had actually given.
+        the way back. Until the schema grew a field for every asked question, ten
+        questions were in that position, and reopening a meeting through a saved
+        declaration silently discarded eleven of eighty-three answers the client had
+        actually given.
 
         A declaration is what you PRODUCE, at the end, from `save`. Work in progress
         belongs in a container that holds everything the adviser typed, so this writes

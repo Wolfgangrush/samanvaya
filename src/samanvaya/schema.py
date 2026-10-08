@@ -77,6 +77,10 @@ _ORG_KEYS: frozenset[str] = frozenset(
         "processes_special_category_data",
         "notified_significant_data_fiduciary",
         "share_of_revenue_from_selling_personal_data",
+        "data_categories",
+        "purposes",
+        "recipients",
+        "retention",
     }
 )
 """The closed set of keys permitted inside ``organisation``."""
@@ -90,6 +94,7 @@ _CHILDREN_KEYS: frozenset[str] = frozenset(
         "targeted_advertising_to_children",
         "likely_detrimental_effect",
         "age_verification_method",
+        "responsible_person_designated",
     }
 )
 """The closed set of keys permitted inside ``children``."""
@@ -108,6 +113,7 @@ _NOTICE_KEYS: frozenset[str] = frozenset(
         "states_retention_period",
         "states_controller_identity",
         "states_transfer_destinations",
+        "is_multi_lingual",
     }
 )
 """The closed set of keys permitted inside ``notice``."""
@@ -135,6 +141,8 @@ _CONSENT_KEYS: frozenset[str] = frozenset(
         "local_language_option_offered",
         "privacy_officer_contact_provided",
         "obtained_via_consent_manager",
+        "consent_text",
+        "withdrawal_method",
     }
 )
 """The closed set of keys permitted inside ``consent_mechanism``."""
@@ -148,6 +156,7 @@ _BREACH_KEYS: frozenset[str] = frozenset(
         "individual_notification_trigger",
         "maintains_breach_register",
         "register_retention_period",
+        "incident_severity_rule",
     }
 )
 """The closed set of keys permitted inside ``breach_workflow``."""
@@ -160,6 +169,7 @@ _DSR_KEYS: frozenset[str] = frozenset(
         "grievance_mechanism_published",
         "grievance_response_period_days",
         "identity_verification",
+        "request_channel",
     }
 )
 """The closed set of keys permitted inside ``dsr_workflow``."""
@@ -335,6 +345,18 @@ def _build_organisation(obj: Mapping[str, Any]) -> Organisation:
             "organisation.share_of_revenue_from_selling_personal_data",
             allow_none=True,
         ),
+        data_categories=_expect_list_of_str(
+            obj.get("data_categories", []), "organisation.data_categories"
+        ),
+        purposes=_expect_list_of_str(
+            obj.get("purposes", []), "organisation.purposes"
+        ),
+        recipients=_expect_list_of_str(
+            obj.get("recipients", []), "organisation.recipients"
+        ),
+        retention=_expect_str(
+            obj.get("retention"), "organisation.retention", allow_none=True
+        ),
     )
 
 
@@ -380,6 +402,7 @@ def _build_children(obj: Mapping[str, Any]) -> ChildProcessingDeclaration:
         tracks_children=_expect_bool(obj.get("tracks_children"), "children.tracks_children", allow_none=True),
         targeted_advertising_to_children=_expect_bool(obj.get("targeted_advertising_to_children"), "children.targeted_advertising_to_children", allow_none=True),
         likely_detrimental_effect=_expect_bool(obj.get("likely_detrimental_effect"), "children.likely_detrimental_effect", allow_none=True),
+        responsible_person_designated=_expect_bool(obj.get("responsible_person_designated"), "children.responsible_person_designated", allow_none=True),
     )
 
 
@@ -403,6 +426,7 @@ def _build_notice(obj: Mapping[str, Any]) -> NoticeDeclaration:
         states_retention_period=_expect_bool(obj.get("states_retention_period"), "notice.states_retention_period", allow_none=True),
         states_controller_identity=_expect_bool(obj.get("states_controller_identity"), "notice.states_controller_identity", allow_none=True),
         states_transfer_destinations=_expect_bool(obj.get("states_transfer_destinations"), "notice.states_transfer_destinations", allow_none=True),
+        is_multi_lingual=_expect_str(obj.get("is_multi_lingual"), "notice.is_multi_lingual", allow_none=True),
     )
 
 
@@ -429,6 +453,8 @@ def _build_consent(obj: Mapping[str, Any]) -> ConsentMechanism:
         local_language_option_offered=_expect_bool(obj.get("local_language_option_offered"), "consent_mechanism.local_language_option_offered", allow_none=True),
         privacy_officer_contact_provided=_expect_bool(obj.get("privacy_officer_contact_provided"), "consent_mechanism.privacy_officer_contact_provided", allow_none=True),
         obtained_via_consent_manager=_expect_bool(obj.get("obtained_via_consent_manager"), "consent_mechanism.obtained_via_consent_manager", allow_none=True),
+        consent_text=_expect_str(obj.get("consent_text"), "consent_mechanism.consent_text", allow_none=True),
+        withdrawal_method=_expect_str(obj.get("withdrawal_method"), "consent_mechanism.withdrawal_method", allow_none=True),
     )
 
 
@@ -464,6 +490,11 @@ def _build_breach(obj: Mapping[str, Any]) -> BreachWorkflow:
             "breach_workflow.register_retention_period",
             allow_none=True,
         ),
+        incident_severity_rule=_expect_str(
+            obj.get("incident_severity_rule"),
+            "breach_workflow.incident_severity_rule",
+            allow_none=True,
+        ),
     )
 
 
@@ -492,6 +523,9 @@ def _build_dsr(obj: Mapping[str, Any]) -> DsrWorkflow:
             obj.get("identity_verification"),
             "dsr_workflow.identity_verification",
             allow_none=True,
+        ),
+        request_channel=_expect_str(
+            obj.get("request_channel"), "dsr_workflow.request_channel", allow_none=True
         ),
     )
 
